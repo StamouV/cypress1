@@ -1,0 +1,30 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "types": [
+      "cypress",
+      "cypress-grep"
+    ],
+    "baseUrl": "../node_modules",
+    "module": "commonjs",
+    "target": "es5",
+    "lib": [
+      "dom",
+      "es6"
+    ],
+    "jsx": "react",
+    "esModuleInterop": true
+  },
+  "include": [
+    "../node_modules/cypress",
+    "../node_modules/cypress-promise",
+    "../node_modules/cypress-commands",
+    "../node_modules/cypress-localstorage-commands",
+    "../node_modules/@cypress/skip-test",
+    "**/*.ts",
+    "support/index.ts",
+    "support/commands",
+    "support/log_commands"
+  ],
+  "exclude": []
+}
