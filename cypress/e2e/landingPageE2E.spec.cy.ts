@@ -1,8 +1,7 @@
 import LandingPage from "../pages/landingPage";
 import { BddStep } from '../support/log_commands';
 
-
-//test commit
+//added comment to verify commit
 describe('Landing Page', () => {
     const landingPage = new LandingPage();
 
@@ -11,26 +10,41 @@ describe('Landing Page', () => {
         landingPage.open();
     });
 
-    it('Verify landed', () => {
+     it('Verify Header Panel', () => {
         cy.logStep(BddStep.THEN, 'Header Panel exists');
         landingPage.getHeaderPanel().should('exist');
     });
 
-     it('Verify left panel ', () => {                       //added
-        cy.logStep(BddStep.THEN, 'left panel exists');      //added
-        landingPage.getLeftPanel().should('exist');         //added
+    it('Verify Header Panel', () => {
+        cy.logStep(BddStep.THEN, 'Header Panel exists');
+        landingPage.getHeaderPanel().should('exist');
     });
 
+     it('Verify left panel ', () => {
+        cy.logStep(BddStep.THEN, 'Left panel exists');
+        landingPage.getLeftPanel().should('exist');
+    });
+
+      it('Verify logo ', () => {
+        cy.logStep(BddStep.THEN, 'Logo exists');
+        landingPage.getLogo().should('exist');
+    });
+
+    it('Verify caption text ', () => {
+            cy.logStep(BddStep.THEN, 'Caption text verified');
+            landingPage.getCaption().should('contain','Experience the difference');
+        });
 
 
-
-     it('Test login -wrong username and password ', () => {                       //added
-       cy.logStep(BddStep.THEN, 'login failed  '); //added
-                cy.get("input[name=username]").type("username"); //added
-                cy.get("input[name=password]").type("password"); //added
-                cy.get(":nth-child(5) > .button").click(); //added
-                cy.get("#rightPanel > p").should("contain.text","An internal error has occurred and has been logged");
-              
+     it('Test login -wrong username and password ', () => {
+       cy.logStep(BddStep.THEN, 'login failed  ');
+                landingPage.getUsernameInput().type('username');
+                landingPage.getPasswordInput().type('password');
+                //cy.get("input[name=password]").type("password");
+                landingPage.getLoginButton().click();
+                //cy.get(":nth-child(5) > .button").click();
+                landingPage.getErrorMessage().should('contain','The username and password could not be verified.');
+                //cy.get("#rightPanel > p").should("contain.text","The username and password could not be verified.");
         });
 
       it ('test contact form ', () => {
@@ -43,7 +57,7 @@ describe('Landing Page', () => {
         cy.get("#contactForm > table > tbody > tr:nth-child(5) > td:nth-child(2) > input").click();
 
         //verify success message
-        cy.get('#rightPanel > :nth-child(3)').should("contain.text","A Customer Care Representative will be contacting you" );
+        cy.get('#rightPanel > :nth-child(3)').should("contain","A Customer Care Representative will be contacting you" );
 
       });
 
